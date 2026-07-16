@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>مقارنة أسعار رسائل SMS — بيفاتل وتقنيات</title>
+  <style>
+    :root {
+      --blue: #1f4c9b;
+      --green: #11e78f;
+      --green-dark: #08a968;
+      --ink: #13233f;
+      --muted: #667085;
+      --bg: #f4f8ff;
+      --card: #ffffff;
+      --line: #dbe5f3;
+      --soft-blue: #eaf1ff;
+      --soft-green: #e8fff5;
+      --shadow: 0 16px 45px rgba(31, 76, 155, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(17, 231, 143, .14), transparent 27%),
+        radial-gradient(circle at 90% 0%, rgba(31, 76, 155, .15), transparent 30%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 36px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 42px;
+      background: linear-gradient(135deg, var(--blue), #163b7c);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      left: -80px;
+      bottom: -130px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: .22;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(17,231,143,.15);
+    }
+
+    h1 {
+      margin: 20px 0 10px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 750px;
+      color: rgba(255,255,255,.84);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .note-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 17px 20px;
+      box-shadow: 0 8px 24px rgba(31, 76, 155, .07);
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+    }
+
+    .note span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .table-card {
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .table-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 24px 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table-head h2 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--blue);
+    }
+
+    .badge {
+      color: #063b26;
+      background: var(--soft-green);
+      border: 1px solid rgba(17, 231, 143, .42);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .desktop-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 20px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      color: #fff;
+      background: var(--blue);
+      font-size: 14px;
+    }
+
+    tbody tr:last-child td { border-bottom: 0; }
+
+    tbody tr:hover { background: #fbfdff; }
+
+    .messages {
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 900;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    .subprice {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      direction: rtl;
+    }
+
+    .taqnyat {
+      background: linear-gradient(180deg, rgba(17,231,143,.09), rgba(17,231,143,.03));
+    }
+
+    .saving {
+      display: inline-block;
+      min-width: 94px;
+      color: #075b39;
+      background: var(--soft-green);
+      border: 1px solid rgba(17, 231, 143, .35);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-weight: 900;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    .mobile-cards { display: none; }
+
+    .summary {
+      margin-top: 24px;
+      padding: 24px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--green), #09c879);
+      color: #063925;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      box-shadow: 0 14px 35px rgba(17, 231, 143, .2);
+    }
+
+    .summary h3 {
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+
+    .summary p {
+      margin: 0;
+      opacity: .82;
+    }
+
+    .summary-value {
+      min-width: 180px;
+      text-align: center;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.72);
+      font-weight: 900;
+      font-size: 24px;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    footer {
+      padding: 22px 4px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 20px, 1180px); padding-top: 16px; }
+      .hero { padding: 30px 24px; border-radius: 22px; }
+      .note-strip { grid-template-columns: 1fr; }
+      .table-head { align-items: flex-start; flex-direction: column; padding: 21px; }
+      .desktop-table { display: none; }
+      .mobile-cards {
+        display: grid;
+        gap: 14px;
+        padding: 16px;
+      }
+      .price-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .price-card-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 17px;
+        background: var(--soft-blue);
+        color: var(--blue);
+        font-weight: 900;
+      }
+      .price-card-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .price-cell {
+        padding: 16px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+      }
+      .price-cell:nth-child(odd) { border-left: 1px solid var(--line); }
+      .price-cell small {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 7px;
+      }
+      .price-cell strong {
+        display: block;
+        direction: ltr;
+        unicode-bidi: isolate;
+      }
+      .price-cell.highlight { background: var(--soft-green); }
+      .saving-mobile {
+        grid-column: 1 / -1;
+        padding: 13px;
+        text-align: center;
+        background: #f8fffc;
+        color: #075b39;
+        font-weight: 900;
+      }
+      .summary { flex-direction: column; align-items: stretch; }
+      .summary-value { min-width: 0; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; padding: 0; }
+      .hero, .table-card, .note, .summary { box-shadow: none; }
+      .hero { border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow"><span class="dot"></span> مقارنة أسعار SMS</div>
+      <h1>بيفاتل مقابل تقنيات</h1>
+      <p>مقارنة مباشرة للباقات المشتركة بين الشركتين، مع احتساب ضريبة القيمة المضافة على أسعار بيفاتل لعمل مقارنة عادلة.</p>
+    </section>
+
+    <section class="note-strip" aria-label="ملاحظات الأسعار">
+      <div class="note">
+        <strong>بيفاتل</strong>
+        <span>الأسعار المعلنة لا تشمل ضريبة القيمة المضافة 15%.</span>
+      </div>
+      <div class="note">
+        <strong>تقنيات</strong>
+        <span>الأسعار المعلنة تشمل ضريبة القيمة المضافة.</span>
+      </div>
+    </section>
+
+    <section class="table-card">
+      <div class="table-head">
+        <h2>مقارنة الباقات المشتركة</h2>
+        <span class="badge">تقنيات أقل في الأربع باقات</span>
+      </div>
+
+      <table class="desktop-table">
+        <thead>
+          <tr>
+            <th>عدد الرسائل</th>
+            <th>بيفاتل قبل الضريبة</th>
+            <th>بيفاتل بعد الضريبة</th>
+            <th>تقنيات شامل الضريبة</th>
+            <th>التوفير مع تقنيات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="messages">10,000</td>
+            <td><span class="price">900 ر.س</span><span class="subprice">0.09 ر.س للرسالة</span></td>
+            <td><span class="price">1,035 ر.س</span></td>
+            <td class="taqnyat"><span class="price">920 ر.س</span><span class="subprice">0.092 ر.س للرسالة</span></td>
+            <td><span class="saving">115 ر.س</span></td>
+          </tr>
+          <tr>
+            <td class="messages">25,000</td>
+            <td><span class="price">2,000 ر.س</span><span class="subprice">0.08 ر.س للرسالة</span></td>
+            <td><span class="price">2,300 ر.س</span></td>
+            <td class="taqnyat"><span class="price">2,185 ر.س</span><span class="subprice">0.0874 ر.س للرسالة</span></td>
+            <td><span class="saving">115 ر.س</span></td>
+          </tr>
+          <tr>
+            <td class="messages">50,000</td>
+            <td><span class="price">3,750 ر.س</span><span class="subprice">0.075 ر.س للرسالة</span></td>
+            <td><span class="price">4,312.50 ر.س</span></td>
+            <td class="taqnyat"><span class="price">4,025 ر.س</span><span class="subprice">0.0805 ر.س للرسالة</span></td>
+            <td><span class="saving">287.50 ر.س</span></td>
+          </tr>
+          <tr>
+            <td class="messages">100,000</td>
+            <td><span class="price">6,500 ر.س</span><span class="subprice">0.065 ر.س للرسالة</span></td>
+            <td><span class="price">7,475 ر.س</span></td>
+            <td class="taqnyat"><span class="price">6,325 ر.س</span><span class="subprice">0.06325 ر.س للرسالة</span></td>
+            <td><span class="saving">1,150 ر.س</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mobile-cards">
+        <article class="price-card">
+          <div class="price-card-title"><span>10,000 رسالة</span><span>باقة مشتركة</span></div>
+          <div class="price-card-grid">
+            <div class="price-cell"><small>بيفاتل قبل الضريبة</small><strong>900 ر.س</strong></div>
+            <div class="price-cell"><small>بيفاتل بعد الضريبة</small><strong>1,035 ر.س</strong></div>
+            <div class="price-cell highlight"><small>تقنيات شامل الضريبة</small><strong>920 ر.س</strong></div>
+            <div class="price-cell"><small>سعر تقنيات للرسالة</small><strong>0.092 ر.س</strong></div>
+            <div class="saving-mobile">التوفير: 115 ر.س</div>
+          </div>
+        </article>
+
+        <article class="price-card">
+          <div class="price-card-title"><span>25,000 رسالة</span><span>باقة مشتركة</span></div>
+          <div class="price-card-grid">
+            <div class="price-cell"><small>بيفاتل قبل الضريبة</small><strong>2,000 ر.س</strong></div>
+            <div class="price-cell"><small>بيفاتل بعد الضريبة</small><strong>2,300 ر.س</strong></div>
+            <div class="price-cell highlight"><small>تقنيات شامل الضريبة</small><strong>2,185 ر.س</strong></div>
+            <div class="price-cell"><small>سعر تقنيات للرسالة</small><strong>0.0874 ر.س</strong></div>
+            <div class="saving-mobile">التوفير: 115 ر.س</div>
+          </div>
+        </article>
+
+        <article class="price-card">
+          <div class="price-card-title"><span>50,000 رسالة</span><span>باقة مشتركة</span></div>
+          <div class="price-card-grid">
+            <div class="price-cell"><small>بيفاتل قبل الضريبة</small><strong>3,750 ر.س</strong></div>
+            <div class="price-cell"><small>بيفاتل بعد الضريبة</small><strong>4,312.50 ر.س</strong></div>
+            <div class="price-cell highlight"><small>تقنيات شامل الضريبة</small><strong>4,025 ر.س</strong></div>
+            <div class="price-cell"><small>سعر تقنيات للرسالة</small><strong>0.0805 ر.س</strong></div>
+            <div class="saving-mobile">التوفير: 287.50 ر.س</div>
+          </div>
+        </article>
+
+        <article class="price-card">
+          <div class="price-card-title"><span>100,000 رسالة</span><span>باقة مشتركة</span></div>
+          <div class="price-card-grid">
+            <div class="price-cell"><small>بيفاتل قبل الضريبة</small><strong>6,500 ر.س</strong></div>
+            <div class="price-cell"><small>بيفاتل بعد الضريبة</small><strong>7,475 ر.س</strong></div>
+            <div class="price-cell highlight"><small>تقنيات شامل الضريبة</small><strong>6,325 ر.س</strong></div>
+            <div class="price-cell"><small>سعر تقنيات للرسالة</small><strong>0.06325 ر.س</strong></div>
+            <div class="saving-mobile">التوفير: 1,150 ر.س</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div>
+        <h3>أكبر توفير في الباقات المشتركة</h3>
+        <p>عند شراء باقة 100,000 رسالة من تقنيات بدلًا من بيفاتل بعد احتساب الضريبة.</p>
+      </div>
+      <div class="summary-value">1,150 ر.س</div>
+    </section>
+
+    <footer>
+      الأسعار مبنية على عرض بيفاتل المرسل وصفحة باقات تقنيات الرسمية، وتم إعداد المقارنة بتاريخ 16 يوليو 2026.<br>
+      المقارنة لا تشمل رسوم إضافة أو اعتماد اسم المرسل.
+    </footer>
+  </main>
+</body>
+</html>
